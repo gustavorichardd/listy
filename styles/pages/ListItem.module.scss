@@ -1,0 +1,18 @@
+.tableRowItem {
+  td {
+    // border: 1px solid blue;
+
+    padding: 0 0.3rem;
+    text-align: center;
+  }
+  .tableRowItemName {
+    text-align: left;
+    width: 15em;
+  }
+  .tableRowItemAction {
+    width: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
