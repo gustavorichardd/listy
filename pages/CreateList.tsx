@@ -1,27 +1,32 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import styles from '../styles/pages/CreateList.module.scss'
+import axios from 'axios'
 
 const CreateList: NextPage = () => {
   const [listPrivate, setListPrivate] = useState(false)
+  const router = useRouter();
+  const [listName, setListName] = useState('')
+  const [listPassword, setListPassword] = useState('')
+
 
   async function handleSetListPrivate() {
     setListPrivate(!listPrivate)
   }
 
   async function handleCreateNewList() {
-
+    if (listName.trim().length === 0) return null
+    const response = await axios.post('/api/list', { listName, listPassword, listPrivate })
+    console.log(response)
+    router.push('/ListContent')
   }
 
   return (
     <div className={styles.container}>
-      <h1>NOVA LISTY</h1>
-
-
       <label htmlFor='listName'>Insira o nome da sua lista</label>
-      <input type="text" name='listName' id='listName' />
+      <input type="text" name='listName' id='listName' value={listName} onChange={e => setListName(e.target.value)} required />
 
       <div className={styles.CreatListPrivate}>
         <label className={styles.switch}  >
@@ -32,6 +37,15 @@ const CreateList: NextPage = () => {
             <span className={styles.switchButton}></span>
           </div>
         </label>
+
+        {
+          listPrivate
+            ? (<div className={styles.secretPrivateList}>
+              <label>Já que ela é privada, qual a senha a ser usada?</label>
+              <input type="text" value={listPassword} onChange={e => setListPassword(e.target.value)} required />
+            </div>)
+            : null
+        }
       </div>
 
       <button onClick={handleCreateNewList}>Criar LISTY</button>

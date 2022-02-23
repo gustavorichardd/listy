@@ -4,7 +4,6 @@ import styles from '../styles/pages/Home.module.scss'
 import { ListItem } from './components/ListItem'
 
 
-
 const ListContent: NextPage = () => {
   const listaDeCompras = [
     {
@@ -33,9 +32,9 @@ const ListContent: NextPage = () => {
     },
   ]
 
+
   return (
     <div className={styles.container}>
-      <h1>LISTY</h1>
       <table>
         <tbody>
 
