@@ -1,12 +1,14 @@
 import mongoose from 'mongoose';
 
-// OUR TODO SCHEMA
 const ListSchema = new mongoose.Schema({
   listName: String,
   listPrivate: Boolean,
-  listIdentification: String,
   listPassword: String,
-  listContent: [String]
+  listIdentification: String,
+  listContent: {
+    type: [String],
+    default: []
+  }
 })
 
 const List = mongoose.models.Lists || mongoose.model("Lists", ListSchema)

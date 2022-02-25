@@ -1,10 +1,15 @@
 import type { NextPage } from 'next'
-import styles from '../styles/pages/Home.module.scss'
+import { ReactNode, useEffect } from 'react'
 
 import { ListItem } from './components/ListItem'
 
+import styles from '../styles/pages/ListContent.module.scss'
 
-const ListContent: NextPage = () => {
+interface propsListContent {
+  onClose: () => void
+}
+
+const ListContent: NextPage<propsListContent> = ({ onClose }: propsListContent) => {
   const listaDeCompras = [
     {
       name: 'Arroz',
@@ -34,16 +39,19 @@ const ListContent: NextPage = () => {
 
 
   return (
-    <div className={styles.container}>
-      <table>
-        <tbody>
+    <div className={styles.modalOverlay}>
 
-          {listaDeCompras.map((item, index) => (
-            <ListItem key={index} itemName={item.name} quanty={item.quanty} />
+      <div className={styles.container}>
+        <table>
+          <tbody>
+            {listaDeCompras.map((item, index) => (
+              <ListItem key={index} itemName={item.name} quanty={item.quanty} />
 
-          ))}
-        </tbody>
-      </table>
+            ))}
+            <button onClick={onClose} className={styles.closeButton} />
+          </tbody>
+        </table>
+      </div>
 
     </div>
   )

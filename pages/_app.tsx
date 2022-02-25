@@ -11,11 +11,7 @@ function MyApp({
   Component,
   pageProps: { session, pageProps },
 }: AppProps) {
-
   const [logged, setLogged] = useState(false)
-
-  console.log(logged)
-
   getSession().then((result) => {
     result ? setLogged(true) : setLogged(false)
   })

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
+import generateRandomKey from '../utils/randomKey'
 
 import styles from '../styles/pages/CreateList.module.scss'
 import axios from 'axios'
@@ -11,6 +13,8 @@ const CreateList: NextPage = () => {
   const [listName, setListName] = useState('')
   const [listPassword, setListPassword] = useState('')
 
+  const { data: session, status } = useSession()
+
 
   async function handleSetListPrivate() {
     setListPrivate(!listPrivate)
@@ -18,9 +22,10 @@ const CreateList: NextPage = () => {
 
   async function handleCreateNewList() {
     if (listName.trim().length === 0) return null
-    const response = await axios.post('/api/list', { listName, listPassword, listPrivate })
-    console.log(response)
-    router.push('/ListContent')
+
+    await axios.post('/api/lists', { listName, listPassword, listPrivate, session })
+
+    router.push('/HomePage')
   }
 
   return (

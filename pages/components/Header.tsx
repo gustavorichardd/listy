@@ -1,6 +1,4 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BiHomeAlt } from 'react-icons/bi'
 import { signOut, getSession } from 'next-auth/react'
 
