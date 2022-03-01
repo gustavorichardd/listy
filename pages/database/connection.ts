@@ -3,6 +3,7 @@ import mongoose, { Model } from "mongoose"
 
 import { List } from "./models/list"
 import { User } from "./models/User"
+import { Item } from "./models/Item"
 // CONNECTING TO MONGOOSE (Get Database Url from .env.local)
 const { DATABASE_URL } = process.env
 
@@ -12,5 +13,5 @@ export const connect = async () => {
     .connect(DATABASE_URL as string)
     .catch(err => console.log(err))
 
-  return { conn, List, User }
+  return { conn, List, User, Item }
 }

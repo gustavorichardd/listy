@@ -1,15 +1,20 @@
 import type { NextPage } from 'next'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import { ListItem } from './components/ListItem'
+import { AddItem } from './components/AddItem'
+
+
 
 import styles from '../styles/pages/ListContent.module.scss'
 
 interface propsListContent {
-  onClose: () => void
+  onClose: () => void,
 }
 
 const ListContent: NextPage<propsListContent> = ({ onClose }: propsListContent) => {
+  const [addItemOptions, setSddItemOptions] = useState(false)
+
   const listaDeCompras = [
     {
       name: 'Arroz',
@@ -38,19 +43,27 @@ const ListContent: NextPage<propsListContent> = ({ onClose }: propsListContent) 
   ]
 
 
+
+  function handleAddNewItem() {
+    setSddItemOptions(true)
+  }
+
   return (
     <div className={styles.modalOverlay}>
 
       <div className={styles.container}>
+        <button onClick={handleAddNewItem} className={styles.addNewItemButton} />
         <table>
           <tbody>
-            {listaDeCompras.map((item, index) => (
+            {/* {listaDeCompras.map((item, index) => (
               <ListItem key={index} itemName={item.name} quanty={item.quanty} />
 
-            ))}
-            <button onClick={onClose} className={styles.closeButton} />
+            ))} */}
+
+            {addItemOptions ? <AddItem closeAddItemModal={() => setSddItemOptions(false)} /> : null}
           </tbody>
         </table>
+        <button onClick={onClose} className={styles.closeButton} />
       </div>
 
     </div>

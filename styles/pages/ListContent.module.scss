@@ -19,6 +19,36 @@
     justify-content: center;
     align-items: center;
 
+    .addNewItemButton {
+      background-color: transparent;
+      outline: none;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      right: 16px;
+      top: 16px;
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center;
+
+      border: 2.5px solid #000;
+      border-radius: 50%;
+
+      &:before,
+      &:after {
+        content: " ";
+        position: absolute;
+        width: 2.5px;
+        height: 24px;
+        background-color: #000;
+      }
+
+      &:before {
+        transform: rotate(90deg);
+      }
+    }
+
     .closeButton {
       background-color: transparent;
       outline: none;

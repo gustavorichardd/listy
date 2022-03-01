@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { AddItem } from './components/AddItem'
 import generateRandomKey from '../utils/randomKey'
 
 import styles from '../styles/pages/CreateList.module.scss'
@@ -12,6 +13,7 @@ const CreateList: NextPage = () => {
   const router = useRouter();
   const [listName, setListName] = useState('')
   const [listPassword, setListPassword] = useState('')
+  const [isAddItemModalVisible, setIsAddItemModalVisible] = useState(false)
 
   const { data: session, status } = useSession()
 
@@ -43,6 +45,8 @@ const CreateList: NextPage = () => {
           </div>
         </label>
 
+
+
         {
           listPrivate
             ? (<div className={styles.secretPrivateList}>
@@ -51,6 +55,12 @@ const CreateList: NextPage = () => {
             </div>)
             : null
         }
+      </div>
+
+      <div className={styles.listItens}>
+
+
+        <button>+ item</button>
       </div>
 
       <button onClick={handleCreateNewList}>Criar LISTY</button>
